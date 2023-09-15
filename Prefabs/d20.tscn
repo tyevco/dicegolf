@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvkw8w0uxc5x7"]
+
+[ext_resource type="ArrayMesh" uid="uid://bnjwkw371tut1" path="res://Models/_import/dice.gltf/4_d20.res" id="1_47260"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_e6edj"]
+points = PackedVector3Array(-0.519501, 0.198292, -0.899802, -0.321179, -0.840572, -0.556123, -1.039, -0.198461, -5.96046e-08, -0.642155, 0.840568, -5.96046e-08, 0.320976, 0.840568, -0.556123, 0.519501, -0.198461, -0.899802, 0.641952, -0.840572, -5.96046e-08, -0.321179, -0.840572, 0.555946, -0.519704, 0.198292, 0.899802, 0.320976, 0.840568, 0.555946, 1.039, 0.198292, -5.96046e-08, 0.519501, -0.198461, 0.899802)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="4D20" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67526, 0, -0.344911)
+mesh = ExtResource("1_47260")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67526, 0, -0.344911)
+shape = SubResource("ConvexPolygonShape3D_e6edj")
