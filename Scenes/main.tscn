@@ -51,9 +51,9 @@ size = Vector3(100, 1, 100)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0908661, 0, 7.67493)
 script = ExtResource("4_lfhs5")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("TrackingNode")]
+[node name="CameraRig" type="Node3D" parent="." node_paths=PackedStringArray("TrackingNode")]
 script = ExtResource("2_rlgek")
 TrackingNode = NodePath("../Player")
-Offset = Vector3(0, 10, -10)
 
-[connection signal="DiceRolled" from="D20" to="Camera3D" method="_on_d_20_dice_rolled"]
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 4, 6)
