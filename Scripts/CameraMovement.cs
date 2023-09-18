@@ -22,13 +22,13 @@ public partial class CameraMovement : Node3D
 	{
 		if (@event is InputEventMouseMotion mouseMotion)
 		{
-			RotateY(Mathf.DegToRad(mouseMotion.Relative.X * HorizontalMouseSensitivity));
-			Camera.RotateX(Mathf.DegToRad(mouseMotion.Relative.Y * VerticalMouseSensitivity));
+			RotateY(Mathf.DegToRad(-mouseMotion.Relative.X * HorizontalMouseSensitivity));
+			Camera.RotateX(Mathf.DegToRad(-mouseMotion.Relative.Y * VerticalMouseSensitivity));
 			
-			GD.Print($"{mouseMotion.Relative}");
+//			GD.Print($"{mouseMotion.Relative}");
 		}
 		
-		GD.Print($"{Camera.Position}; {Camera.Rotation} | {Position}; {Rotation}");
+		//GD.Print($"{Camera.Position}; {Camera.Rotation} | {Position}; {Rotation}");
 	}
 
 	public override void _Process(double delta)

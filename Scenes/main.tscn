@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://m5gnf4byif0k"]
+[gd_scene load_steps=9 format=3 uid="uid://m5gnf4byif0k"]
 
 [ext_resource type="PackedScene" uid="uid://cvkw8w0uxc5x7" path="res://Prefabs/d20.tscn" id="1_kgonf"]
 [ext_resource type="Script" path="res://Scripts/CameraMovement.cs" id="2_rlgek"]
 [ext_resource type="Texture2D" uid="uid://cjvki8y02d6hr" path="res://Assets/Textures/prototype_textures/Dark/texture_05.png" id="3_8yg8r"]
 [ext_resource type="PackedScene" uid="uid://u5udcngvktvm" path="res://Prefabs/Player.tscn" id="3_l8hxa"]
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="4_lfhs5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_esns1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -47,9 +46,9 @@ material_override = SubResource("StandardMaterial3D_1rdm3")
 use_collision = true
 size = Vector3(100, 1, 100)
 
-[node name="Player" parent="." instance=ExtResource("3_l8hxa")]
+[node name="Player" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("3_l8hxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0908661, 0, 7.67493)
-script = ExtResource("4_lfhs5")
+camera_rig = NodePath("../CameraRig")
 
 [node name="CameraRig" type="Node3D" parent="." node_paths=PackedStringArray("TrackingNode")]
 script = ExtResource("2_rlgek")
