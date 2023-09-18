@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://m5gnf4byif0k"]
+
+[ext_resource type="PackedScene" uid="uid://cvkw8w0uxc5x7" path="res://Prefabs/d20.tscn" id="1_kgonf"]
+[ext_resource type="Texture2D" uid="uid://cjvki8y02d6hr" path="res://Assets/Textures/prototype_textures/Dark/texture_05.png" id="3_8yg8r"]
+[ext_resource type="Script" path="res://addons/goutte.camera.trackball/trackball_camera.gd" id="3_p55hl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_esns1"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_qyyth"]
+sky_material = SubResource("ProceduralSkyMaterial_esns1")
+
+[sub_resource type="Environment" id="Environment_mupfe"]
+background_mode = 2
+sky = SubResource("Sky_qyyth")
+tonemap_mode = 2
+sdfgi_enabled = true
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.756863, 0.764706, 0.792157, 1)
+fog_density = 0.0005
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1rdm3"]
+albedo_texture = ExtResource("3_8yg8r")
+uv1_triplanar = true
+
+[node name="main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mupfe")
+
+[node name="D20" parent="." instance=ExtResource("1_kgonf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18275, 4.2037, 2.73941)
+
+[node name="TrackballCamera" type="Camera3D" parent="D20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.394603, -0.959535, 2.78746)
+script = ExtResource("3_p55hl")
+enable_pitch_limit = true
+
+[node name="world" type="Node3D" parent="."]
+
+[node name="floor" type="CSGBox3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.570198, 0)
+material_override = SubResource("StandardMaterial3D_1rdm3")
+size = Vector3(100, 1, 100)
