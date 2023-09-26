@@ -44,6 +44,6 @@ func _physics_process(delta):
 		if (animation_player.current_animation != "Idle"):
 			animation_player.play("Idle")
 
-	print(camera_rig.get_global_transform().basis.z)	
+	# print(camera_rig.get_global_transform().basis.z)	
 
 	move_and_slide()

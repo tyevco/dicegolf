@@ -11,4 +11,8 @@
 [Design choices]
 * Godot 4.1 (mono)
 
+[Gameplay]
+- Objectives
+	- The primary goal will be to complete a "golf course" by having your d20 enter the "hole". Score will be based on numbers rolled, as well as the number of shots taken.
+- 
 

@@ -1,0 +1,20 @@
+[gd_resource type="VisualShader" format=3 uid="uid://dbg010uc705e8"]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+// Varyings
+varying vec3 position;
+
+
+
+
+void vertex() {
+	position = vec3(0.0);
+}
+"
+graph_offset = Vector2(-635.984, -137.824)
+varyings/position = "0,4"
+nodes/fragment/0/position = Vector2(-460, 460)

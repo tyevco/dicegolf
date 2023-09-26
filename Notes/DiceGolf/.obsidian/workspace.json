@@ -8,12 +8,24 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5d7a3dcc4b16aa72",
+            "id": "c93ea28ea81d53b1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Design Doc.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f9271fd0c4c46d3f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Sample GDD Topics.md",
                 "mode": "source",
                 "source": false
               }
@@ -146,9 +158,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5d7a3dcc4b16aa72",
+  "active": "c93ea28ea81d53b1",
   "lastOpenFiles": [
-    "Untitled.canvas",
-    "Design Doc.md"
+    "Sample GDD Topics.md",
+    "Design Doc.md",
+    "Roadmap.md",
+    "Untitled",
+    "Untitled.canvas"
   ]
 }

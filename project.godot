@@ -21,7 +21,7 @@ project/assembly_name="PleaseKissMyElbow"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/DynamicCameraSystem/plugin.cfg", "res://addons/goutte.camera.trackball/plugin.cfg")
+enabled=PackedStringArray()
 
 [filesystem]
 
