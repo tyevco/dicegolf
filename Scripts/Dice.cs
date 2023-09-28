@@ -4,83 +4,101 @@ using Godot.Collections;
 
 public partial class Dice : RigidBody3D
 {
-	[Signal] public delegate void DiceRolledEventHandler(int result, Dice dice);
+    [Signal]
+    public delegate void DiceRolledEventHandler(int result, Dice dice);
 
-	[Export] public Dictionary<int, Vector3> Sides = new Dictionary<int, Vector3>();
-	[Export] public float SettleDuration = 1.5f;
+    [Export] public Dictionary<int, Vector3> Sides = new Dictionary<int, Vector3>();
+    [Export] public float SettleDuration = 1.5f;
 
-	private bool Rolled { get; set; }
-	private float SettlingDurationSpent { get; set; }
-	private bool Settling { get; set; }
+    private bool Rolled { get; set; }
+    private float SettlingDurationSpent { get; set; }
+    private bool Settling { get; set; }
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+    public bool InGoal { get; private set; }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+    }
 
-	public override void _PhysicsProcess(double delta)
-	{
-		if (Rolled)
-		{
-			SettlingDurationSpent = 0;
-			Settling = false;
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
+    {
+        if (Sleeping && Input.IsActionPressed("roll_dice"))
+        {
+            Rolled = true;
+            ApplyImpulse(Vector3.Up * 5);
+        }
+    }
 
-			if (Sleeping)
-			{
-				Rolled = false;
-				Settling = true;
-			}
-		}
-		else
-		{
-			if (!Sleeping)
-			{
-				Settling = false;
-				Rolled = true;
-				SettlingDurationSpent = 0;
-			}
-		}
+    public override void _PhysicsProcess(double delta)
+    {
+        if (Rolled)
+        {
+            SettlingDurationSpent = 0;
+            Settling = false;
 
-		if (Settling)
-		{
-			SettlingDurationSpent += (float)delta;
+            if (Sleeping)
+            {
+                Rolled = false;
+                Settling = true;
+            }
+        }
+        else
+        {
+            if (!Sleeping)
+            {
+                Settling = false;
+                Rolled = true;
+                SettlingDurationSpent = 0;
+            }
+        }
 
-			if (SettlingDurationSpent >= SettleDuration)
-			{
-				// dice have settled.
-				DetectRoll();
+        if (Settling)
+        {
+            SettlingDurationSpent += (float)delta;
 
-				Settling = false;
-				SettlingDurationSpent = 0;
-			}
-		}
-	}
+            if (SettlingDurationSpent >= SettleDuration)
+            {
+                // dice have settled.
+                DetectRoll();
+
+                Settling = false;
+                SettlingDurationSpent = 0;
+            }
+        }
+    }
+
+    public void EnteredGoal()
+    {
+        this.InGoal = true;
+    }
 
 
-	private void DetectRoll()
-	{
-		// do the side detection.
-		Dictionary<int, float> dotProducts = new Dictionary<int, float>();
+    public void ExitedGoal()
+    {
+        this.InGoal = false;
+    }
 
-		var localUp = ToLocal(Position + Vector3.Up);
+    private void DetectRoll()
+    {
+        // do the side detection.
+        Dictionary<int, float> dotProducts = new Dictionary<int, float>();
 
-		foreach (var side in Sides)
-		{
-			dotProducts[side.Key] = side.Value.Dot(localUp);
+        var localUp = ToLocal(Position + Vector3.Up);
 
-			//GD.Print($"{this.Name} | {side.Key}");
-		}
+        foreach (var side in Sides)
+        {
+            dotProducts[side.Key] = side.Value.Dot(localUp);
 
-		//GD.Print(			$"{this.Name} | Rolling finished, determining results... {string.Join("; ", dotProducts.Where(x => x.Value > 0.001).OrderByDescending(x => x.Value).Take(3).Select(x => $"Side {x.Key} ({x.Value})"))}");
+            //GD.Print($"{this.Name} | {side.Key}");
+        }
 
-		var result = dotProducts.Where(x => x.Value > 0.001).OrderByDescending(x => x.Value).Select(x => x.Key)
-			.FirstOrDefault();
+        //GD.Print(			$"{this.Name} | Rolling finished, determining results... {string.Join("; ", dotProducts.Where(x => x.Value > 0.001).OrderByDescending(x => x.Value).Take(3).Select(x => $"Side {x.Key} ({x.Value})"))}");
 
-		EmitSignal(SignalName.DiceRolled, result, this);
-	}
+        var result = dotProducts.Where(x => x.Value > 0.001).OrderByDescending(x => x.Value).Select(x => x.Key)
+            .FirstOrDefault();
+
+        EmitSignal(SignalName.DiceRolled, result, this);
+    }
 }

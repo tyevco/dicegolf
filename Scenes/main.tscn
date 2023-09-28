@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://m5gnf4byif0k"]
+[gd_scene load_steps=21 format=3 uid="uid://m5gnf4byif0k"]
 
 [ext_resource type="PackedScene" uid="uid://cvkw8w0uxc5x7" path="res://Prefabs/d20.tscn" id="1_kgonf"]
 [ext_resource type="Texture2D" uid="uid://cjvki8y02d6hr" path="res://Assets/Textures/prototype_textures/Dark/texture_05.png" id="3_8yg8r"]
@@ -9,6 +9,8 @@
 [ext_resource type="Shader" uid="uid://dbg010uc705e8" path="res://Assets/Shaders/new_shader.tres" id="4_ys5yk"]
 [ext_resource type="PackedScene" uid="uid://divvfc4f28joq" path="res://addons/kaykit_prototype_bits/Assets/gltf/Wall_Doorway.gltf" id="5_1nskm"]
 [ext_resource type="PackedScene" uid="uid://1w5yaqjxk26" path="res://Prefabs/camera_rig.tscn" id="9_7tsq0"]
+[ext_resource type="PackedScene" uid="uid://d31lckftvfesq" path="res://Prefabs/goal_zone.tscn" id="10_2yaue"]
+[ext_resource type="Script" path="res://Scripts/Status.cs" id="11_k1s23"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_esns1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -85,8 +87,7 @@ metadata/_edit_lock_ = true
 environment = SubResource("Environment_mupfe")
 
 [node name="D20" parent="." instance=ExtResource("1_kgonf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.18275, 7.2037, 6.73941)
-freeze_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18275, 13.2037, 6.73941)
 
 [node name="world" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
@@ -103,7 +104,6 @@ metadata/_edit_lock_ = true
 
 [node name="Primitive_Stairs" type="Node3D" parent="world/room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -0.0701981, 6)
-visible = false
 
 [node name="Primitive_Stairs2" type="MeshInstance3D" parent="world/room/Primitive_Stairs"]
 mesh = SubResource("ArrayMesh_wjwws")
@@ -199,19 +199,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 3.49093, 6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.49093, -2)
 
 [node name="Player" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("3_l8hxa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0908661, 0, 7.67493)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.41288, 0, 15.3142)
 camera_rig = NodePath("../CameraRig")
 
 [node name="CameraRig" parent="." node_paths=PackedStringArray("TrackingNode") instance=ExtResource("9_7tsq0")]
 TrackingNode = NodePath("../Player")
 
-[node name="Primitive_Stairs3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0696621, 0.833798, 23.5634)
-mesh = SubResource("ArrayMesh_wjwws")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_iwd7l")
+[node name="Goal" parent="." instance=ExtResource("10_2yaue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43672, 1, 6.553)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Primitive_Stairs3"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Primitive_Stairs3/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_ckbhg")
+[node name="Status" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 94.0
+offset_top = 76.0
+offset_right = 5159.0
+offset_bottom = 8555.0
+script = ExtResource("11_k1s23")
+
+[connection signal="DiceRolled" from="D20" to="CanvasLayer/Status" method="_on_d_20_dice_rolled"]

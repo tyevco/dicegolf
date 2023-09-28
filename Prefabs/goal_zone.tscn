@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://d31lckftvfesq"]
+
+[ext_resource type="Script" path="res://Scripts/GoalZone.cs" id="1_07cpr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ye1ya"]
+radius = 1.5
+
+[node name="GoalZone" type="Node3D" node_paths=PackedStringArray("Collision")]
+script = ExtResource("1_07cpr")
+Collision = NodePath("CollisionArea")
+
+[node name="GoalMesh" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="GoalMesh"]
+use_collision = true
+radius = 2.0
+metadata/_edit_lock_ = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="GoalMesh"]
+operation = 2
+use_collision = true
+radius = 1.5
+metadata/_edit_lock_ = true
+
+[node name="CollisionArea" type="Area3D" parent="."]
+input_ray_pickable = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionArea"]
+shape = SubResource("CylinderShape3D_ye1ya")
