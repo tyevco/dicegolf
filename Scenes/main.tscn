@@ -79,7 +79,7 @@ points = PackedVector3Array(-0.951834, 3.52381, 2.03175, -2, 2.34693e-07, -2, -2
 [node name="main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.75, -0.43301, 0, 0, 0)
 shadow_enabled = true
 metadata/_edit_lock_ = true
 
@@ -216,5 +216,11 @@ offset_top = 76.0
 offset_right = 5159.0
 offset_bottom = 8555.0
 script = ExtResource("11_k1s23")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+billboard = 1
+text = "3
+"
 
 [connection signal="DiceRolled" from="D20" to="CanvasLayer/Status" method="_on_d_20_dice_rolled"]

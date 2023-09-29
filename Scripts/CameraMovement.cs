@@ -20,7 +20,7 @@ public partial class CameraMovement : Node3D
     
     public override void _Ready()
     {
-        Input.MouseMode = Input.MouseModeEnum.Captured;
+        Input.MouseMode = Input.MouseModeEnum.Confined;
         
         Camera = GetNode(CameraPath) as Node3D;
         OcclusionRay = GetNode(Occlusion) as RayCast3D;
