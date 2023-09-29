@@ -1,10 +1,11 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://8nbgdxqs776t"]
 
-[ext_resource type="Texture2D" uid="uid://b2jwl26ggb0g1" path="res://addons/kaykit_character_pack_adventures/Characters/gltf/Barbarian_barbarian_texture.png" id="1_73c00"]
+[ext_resource type="Texture2D" uid="uid://cjvki8y02d6hr" path="res://Assets/Textures/prototype_textures/Dark/texture_05.png" id="1_sqmm5"]
 
 [resource]
 resource_name = "barbarian_texture"
 transparency = 4
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_73c00")
+albedo_texture = ExtResource("1_sqmm5")
 roughness = 0.5
+uv1_triplanar = true

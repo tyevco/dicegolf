@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dq7x7k5ow10fe"
+path="res://.godot/imported/SM_Buildings_Door_01.obj-87618196074f5291946cbd01d2d43128.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SM_Buildings_Door_01.obj-87618196074f5291946cbd01d2d43128.mesh"]
+
+source_file="res://addons/kaykit_prototype_bits/SM_Buildings_Door_01.obj"
+dest_files=["res://.godot/imported/SM_Buildings_Door_01.obj-87618196074f5291946cbd01d2d43128.mesh", "res://.godot/imported/SM_Buildings_Door_01.obj-87618196074f5291946cbd01d2d43128.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
