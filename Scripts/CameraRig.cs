@@ -18,16 +18,19 @@ public partial class CameraRig : Node3D
     [Export] public float RunSpeed { get; set; } = 15f;
     [Export] public float CrawlSpeed { get; set; } = 5f;
 
-    [ExportCategory("Viewport Controls")]
+    [ExportCategory("Tracking Camera")]
     [Export]
     public float MinimumViewAngle { get; set; } = -60f;
 
     [Export] public float MaximumViewAngle { get; set; } = -15f;
 
-    [ExportCategory("Camera")] [Export] public Camera3D Camera { get; set; }
+    [ExportCategory("Follow Camera")] 
 
     [Export] public Node3D TrackingTarget { get; set; }
 
+    [ExportCategory("Component Settings")]
+    [Export] public Camera3D Camera { get; set; }
+    
     [Export] public Input.MouseModeEnum MouseMode { get; set; }
 
     [Export] public RayCast3D Ray { get; set; }
