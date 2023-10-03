@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://32cf206070wk"]
+
+[ext_resource type="Script" path="res://addons/CineCam/scripts/VirtualCamera.gd" id="1_5tr4m"]
+
+[node name="Camera01" type="Node"]
+script = ExtResource("1_5tr4m")
+
+[node name="Location" type="Node3D" parent="."]
+
+[node name="Target" type="Node3D" parent="."]
