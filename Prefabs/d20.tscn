@@ -3,8 +3,8 @@
 [ext_resource type="ArrayMesh" uid="uid://bnjwkw371tut1" path="res://Assets/Models/_import/dice.gltf/4_d20.res" id="1_47260"]
 [ext_resource type="Script" path="res://Scripts/Dice.cs" id="1_lsrrc"]
 [ext_resource type="Material" uid="uid://bwlevsy4ey3t1" path="res://Assets/Shaders/DiceShader.tres" id="3_edvu0"]
-[ext_resource type="Script" path="res://addons/components/scripts/FollowableComponent.cs" id="4_1gttv"]
-[ext_resource type="Script" path="res://addons/components/scripts/SelectableComponent.cs" id="4_sermf"]
+[ext_resource type="Script" path="res://Scripts/samples/FollowableComponent.cs" id="4_rf4vh"]
+[ext_resource type="Script" path="res://Scripts/samples/SelectableComponent.cs" id="5_2kna5"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_e6edj"]
 points = PackedVector3Array(-0.519501, 0.198292, -0.899802, -0.321179, -0.840572, -0.556123, -1.039, -0.198461, -5.96046e-08, -0.642155, 0.840568, -5.96046e-08, 0.320976, 0.840568, -0.556123, 0.519501, -0.198461, -0.899802, 0.641952, -0.840572, -5.96046e-08, -0.321179, -0.840572, 0.555946, -0.519704, 0.198292, 0.899802, 0.320976, 0.840568, 0.555946, 1.039, 0.198292, -5.96046e-08, 0.519501, -0.198461, 0.899802)
@@ -68,9 +68,9 @@ mesh = SubResource("ArrayMesh_li5rb")
 
 [node name="components" type="Node3D" parent="."]
 
-[node name="SelectableComponent" type="Node" parent="components" node_paths=PackedStringArray("OutlineMesh")]
-script = ExtResource("4_sermf")
-OutlineMesh = NodePath("../../visuals/4D20/Outline")
+[node name="FollowableComponent" type="Node" parent="components"]
+script = ExtResource("4_rf4vh")
 
-[node name="FollowableComponent" type="Node3D" parent="components"]
-script = ExtResource("4_1gttv")
+[node name="SelectableComponent" type="Node" parent="components" node_paths=PackedStringArray("OutlineMesh")]
+script = ExtResource("5_2kna5")
+OutlineMesh = NodePath("../../visuals/4D20/Outline")
