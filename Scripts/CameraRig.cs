@@ -117,7 +117,7 @@ public partial class CameraRig : Node3D
         if (TrackingTarget == null)
         {
             // raycast and get target
-            var obj = GetTargettedObject();
+            var obj = GetTargetedObject();
             if (obj is Node3D node &&
                 node.TryGetNode<SelectableComponent>(SelectableComponentPath, out var selectableComponent))
             {
@@ -161,7 +161,7 @@ public partial class CameraRig : Node3D
         }
     }
 
-    private GodotObject GetTargettedObject()
+    private GodotObject GetTargetedObject()
     {
         var cameraTarget = Camera.GlobalPosition - Camera.GlobalTransform.Basis.Z * 100;
         //Ray.GlobalPosition = Camera.GlobalPosition;
