@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://m5gnf4byif0k"]
+[gd_scene load_steps=11 format=3 uid="uid://m5gnf4byif0k"]
 
 [ext_resource type="PackedScene" uid="uid://cvkw8w0uxc5x7" path="res://Prefabs/d20.tscn" id="1_kgonf"]
 [ext_resource type="Environment" uid="uid://teqiekgnccvo" path="res://Scenes/main.tres" id="1_ushqy"]
@@ -16,12 +16,6 @@ uv1_triplanar = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1ul1"]
 albedo_texture = ExtResource("3_6der5")
 uv1_triplanar = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y13i4"]
-albedo_color = Color(0.952941, 0, 0.478431, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72mqw"]
-albedo_color = Color(0.298039, 0.607843, 0.596078, 1)
 
 [node name="main" type="Node3D"]
 
@@ -152,8 +146,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 MinimumViewAngle = -85.0
 MaximumViewAngle = 85.0
 TrackingTarget = NodePath("../D20")
-DebugObjectStart = NodePath("../CSGSphere3D")
-DebugObjectEnd = NodePath("../CSGSphere3D2")
+DebugObjectStart = NodePath("")
+DebugObjectEnd = NodePath("")
 
 [node name="Goal" parent="." instance=ExtResource("10_2yaue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03672, -1, -0.047)
@@ -174,11 +168,5 @@ offset_top = 76.0
 offset_right = 5159.0
 offset_bottom = 8555.0
 script = ExtResource("11_k1s23")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-material = SubResource("StandardMaterial3D_y13i4")
-
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="."]
-material = SubResource("StandardMaterial3D_72mqw")
 
 [connection signal="DiceRolled" from="D20" to="CanvasLayer/Status" method="_on_d_20_dice_rolled"]

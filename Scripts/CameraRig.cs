@@ -144,43 +144,11 @@ public partial class CameraRig : Node3D
 
     private GodotObject GetTargettedObject()
     {
-        var screen = GetViewport().GetVisibleRect();
-        var screenCenter = new Vector2(screen.Size.X / 2, screen.Size.Y / 2);
-        var cameraProjectOrigin = Camera.ProjectRayOrigin(screenCenter);
-        //var cameraTarget = Camera.ProjectPosition(screenCenter, 100f);
         var cameraTarget = Camera.GlobalPosition - Camera.GlobalTransform.Basis.Z * 100;
         Ray.GlobalPosition = Camera.GlobalPosition;
         Ray.TargetPosition = Ray.ToLocal(cameraTarget);
 
         var collider = Ray.GetCollider();
-
-        if (DebugObjectStart != null)
-            DebugObjectStart.Position = Ray.GlobalPosition;
-
-        DebugDraw3D.DrawLine(Camera.GlobalPosition, cameraTarget, Color.FromHsv(0.25f, 0.86f, 0.82f));
-        DebugDraw3D.DrawLine(Camera.GlobalPosition, GlobalPosition, Color.FromHsv(0.25f, 0.86f, 0.82f));
-        
-        if (collider != null)
-        {
-            DebugDraw3D.DrawLine(Ray.GlobalPosition, Ray.GetCollisionPoint(), Color.FromHsv(1f, 1f, 1f));
-            GD.Print(Ray.GlobalPosition + " : " + Ray.GetCollisionPoint() + "!");
-
-        }
-        else
-        {
-            DebugDraw3D.DrawLine(Ray.GlobalPosition, Ray.TargetPosition, Color.FromHsv(0.74f, 0.82f, 0.87f));
-            GD.Print(Ray.GlobalPosition + " : " + Ray.TargetPosition);
-
-        }
-
-        if (DebugObjectEnd != null)
-        {
-            if (collider != null)
-                DebugObjectEnd.Position = Ray.GetCollisionPoint();
-            else
-                DebugObjectEnd.Position = Ray.TargetPosition;
-        }
-
         return collider;
     }
 }

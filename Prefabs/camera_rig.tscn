@@ -14,4 +14,5 @@ fov = 37.8493
 
 [node name="Ray" type="RayCast3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.766044, -0.642788, 0, 0.642788, 0.766044, 0, 0, 0)
+visible = false
 target_position = Vector3(0, 10, 0)
