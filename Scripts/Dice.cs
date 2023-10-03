@@ -10,7 +10,7 @@ public partial class Dice : RigidBody3D
     [Export] public Dictionary<int, Vector3> Sides = new Dictionary<int, Vector3>();
     [Export] public float SettleDuration = 1.5f;
 
-    private bool Rolled { get; set; }
+    public bool Rolled { get; private set; }
     private float SettlingDurationSpent { get; set; }
     private bool Settling { get; set; }
 
@@ -24,11 +24,11 @@ public partial class Dice : RigidBody3D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        if (Sleeping && Input.IsActionPressed("roll_dice"))
-        {
-            Rolled = true;
-            ApplyImpulse(Vector3.Up * 5);
-        }
+        // if (Sleeping && Input.IsActionPressed("roll_dice"))
+        // {
+        //     Rolled = true;
+        //     ApplyImpulse(Vector3.Up * 5);
+        // }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -100,5 +100,11 @@ public partial class Dice : RigidBody3D
             .FirstOrDefault();
 
         EmitSignal(SignalName.DiceRolled, result, this);
+    }
+
+    public void _on_golf_swing_swing(Vector3 direction, float power)
+    {
+        Rolled = true;
+        ApplyImpulse(direction * power);
     }
 }

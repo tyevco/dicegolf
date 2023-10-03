@@ -20,4 +20,10 @@ public partial class Status : RichTextLabel
         this.Text = $"{DateTime.Now.ToShortTimeString()} : rolled {result}{(dice.InGoal ? " - finished" : "")}\n"
 	        + this.Text;
     }
+
+    public void _on_golf_swing_swing(Vector3 direction, float power)
+    {
+	    this.Text = $"{DateTime.Now.ToShortTimeString()} : swing {direction} @ {power}\n"
+	                + this.Text;
+    }
 }

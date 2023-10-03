@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://m5gnf4byif0k"]
+[gd_scene load_steps=12 format=3 uid="uid://m5gnf4byif0k"]
 
 [ext_resource type="PackedScene" uid="uid://cvkw8w0uxc5x7" path="res://Prefabs/d20.tscn" id="1_kgonf"]
 [ext_resource type="Environment" uid="uid://teqiekgnccvo" path="res://Scenes/main.tres" id="1_ushqy"]
 [ext_resource type="Texture2D" uid="uid://cgqp2yckl4gdx" path="res://Assets/Textures/prototype_textures/Orange/texture_04.png" id="3_6der5"]
 [ext_resource type="Texture2D" uid="uid://cjvki8y02d6hr" path="res://Assets/Textures/prototype_textures/Dark/texture_05.png" id="3_8yg8r"]
+[ext_resource type="Script" path="res://Scripts/GolfSwing.cs" id="3_oer5l"]
 [ext_resource type="PackedScene" uid="uid://1w5yaqjxk26" path="res://Prefabs/camera_rig.tscn" id="9_7tsq0"]
 [ext_resource type="PackedScene" uid="uid://d31lckftvfesq" path="res://Prefabs/goal_zone.tscn" id="10_2yaue"]
 [ext_resource type="Script" path="res://Scripts/Status.cs" id="11_k1s23"]
@@ -36,6 +37,11 @@ environment = ExtResource("1_ushqy")
 
 [node name="D20" parent="." instance=ExtResource("1_kgonf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 51, 0)
+
+[node name="GolfSwing" type="Node" parent="D20" node_paths=PackedStringArray("DiceTarget", "Camera")]
+script = ExtResource("3_oer5l")
+DiceTarget = NodePath("..")
+Camera = NodePath("../../CameraRig")
 
 [node name="world" type="Node3D" parent="."]
 
@@ -175,3 +181,5 @@ offset_bottom = 8555.0
 script = ExtResource("11_k1s23")
 
 [connection signal="DiceRolled" from="D20" to="CanvasLayer/Status" method="_on_d_20_dice_rolled"]
+[connection signal="Swing" from="D20/GolfSwing" to="D20" method="_on_golf_swing_swing"]
+[connection signal="Swing" from="D20/GolfSwing" to="CanvasLayer/Status" method="_on_golf_swing_swing"]
