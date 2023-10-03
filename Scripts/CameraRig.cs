@@ -15,6 +15,9 @@ public partial class CameraRig : Node3D
     [Export(PropertyHint.Range, "0,100,1")]
     public int VerticalMouseSensitivity { get; set; } = 25;
 
+    [Export]
+    public float ZoomSpeed { get; set; } = 1f;
+    
     [ExportGroup("Speed")] [Export] public float WalkSpeed { get; set; } = 10f;
     [Export] public float RunSpeed { get; set; } = 15f;
     [Export] public float CrawlSpeed { get; set; } = 5f;
@@ -47,6 +50,9 @@ public partial class CameraRig : Node3D
     private float _vertMouseSensitivity;
     private SelectableComponent _selectableComponent = null;
 
+    private float _currentZoom = 1f;
+    private float _targetZoom = 1f;
+    
     public override void _Ready()
     {
         Input.MouseMode = MouseMode;
@@ -80,18 +86,28 @@ public partial class CameraRig : Node3D
                 TrackingTarget = _selectableComponent.GetParent().GetParent() as Node3D;
             }
         }
+        else if (@event.IsActionPressed("cam_zoom_in"))
+        {
+            _targetZoom = Mathf.Max(MinimumTrackDistance, _targetZoom - ZoomSpeed);
+        }
+        else if (@event.IsActionPressed("cam_zoom_out"))
+        {
+            _targetZoom = Mathf.Min(MaximumTrackDistance, _targetZoom + ZoomSpeed);
+        }
     }
 
     public override void _PhysicsProcess(double delta)
     {
         if (TrackingTarget != null)
         {
-            this.Position = TrackingTarget.Position;
+            this.Position = TrackingTarget.Position + (Camera.GlobalTransform.Basis.Z * _currentZoom);
         }
     }
 
     public override void _Process(double delta)
     {
+        _currentZoom = Mathf.Lerp(_currentZoom, _targetZoom, 0.1f);
+        
         if (_selectableComponent != null)
         {
             _selectableComponent.SetSelected(false);

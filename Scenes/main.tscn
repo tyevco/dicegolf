@@ -35,7 +35,7 @@ metadata/_edit_lock_ = true
 environment = ExtResource("1_ushqy")
 
 [node name="D20" parent="." instance=ExtResource("1_kgonf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 52, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 51, 0)
 
 [node name="world" type="Node3D" parent="."]
 
