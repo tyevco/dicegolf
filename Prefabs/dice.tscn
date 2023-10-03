@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmxbuci1nr81t"]
+
+[ext_resource type="Script" path="res://Scripts/Dice.cs" id="1_j8s75"]
+[ext_resource type="Script" path="res://Scripts/samples/FollowableComponent.cs" id="4_131op"]
+[ext_resource type="Script" path="res://Scripts/samples/SelectableComponent.cs" id="5_kd0d8"]
+
+[node name="dice" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00161171, 0.0038352, -0.00256419)
+freeze_mode = 1
+script = ExtResource("1_j8s75")
+Sides = {
+1: Vector3(5.36442e-07, 1, 2.68221e-07),
+2: Vector3(0.333, -0.745, 0.577),
+3: Vector3(-0.873, 0.333, -0.357),
+4: Vector3(0.873, -0.334, -0.356),
+5: Vector3(0.746, 0.333, 0.577),
+6: Vector3(-0.127, -0.334, -0.934),
+7: Vector3(-0.333, 0.745, 0.578),
+8: Vector3(-0.667, -0.745, 0),
+9: Vector3(0.127, 0.333, -0.934),
+10: Vector3(-0.745, -0.333, 0.577),
+11: Vector3(0.745, 0.333, -0.577),
+12: Vector3(-0.127, -0.333, 0.934),
+13: Vector3(0.667, 0.745, 0),
+14: Vector3(0.333, -0.745, -0.578),
+15: Vector3(0.127, 0.333, 0.934),
+16: Vector3(-0.745, -0.333, -0.577),
+17: Vector3(-0.873, 0.334, 0.357),
+18: Vector3(0.873, -0.333, 0.357),
+19: Vector3(-0.333, 0.745, -0.577),
+20: Vector3(0.000173795, -1, -4.35896e-05)
+}
+
+[node name="collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.999986, 0.00515595, -0.000900394, -0.00515608, 0.999987, -0.000141886, 0.000899651, 0.000146527, 1, 0, 0, 0)
+
+[node name="cameraMount" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="visuals" type="Node3D" parent="."]
+
+[node name="mesh" type="MeshInstance3D" parent="visuals"]
+skeleton = NodePath("../..")
+
+[node name="meshOutline" type="MeshInstance3D" parent="visuals/mesh"]
+visible = false
+
+[node name="components" type="Node3D" parent="."]
+
+[node name="FollowableComponent" type="Node" parent="components"]
+script = ExtResource("4_131op")
+
+[node name="SelectableComponent" type="Node" parent="components" node_paths=PackedStringArray("OutlineMesh")]
+script = ExtResource("5_kd0d8")
+OutlineMesh = NodePath("../../visuals/mesh/meshOutline")
