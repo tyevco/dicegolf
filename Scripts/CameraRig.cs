@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Godot;
-using PleaseKissMyElbow.addons.components.extensions;
-using PleaseKissMyElbow.addons.components.scripts;
+using tyevco.addons.godot_components;
+using tyevco.scripts.samples;
 
 namespace PleaseKissMyElbow;
 

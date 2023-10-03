@@ -1,5 +1,5 @@
 ﻿using Godot;
-using PleaseKissMyElbow.addons.components;
+using tyevco.addons.godot_components;
 
 [Component]
 public partial class CustomComponent : Node3D

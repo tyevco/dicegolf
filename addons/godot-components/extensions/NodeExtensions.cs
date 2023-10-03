@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Godot;
 
-namespace PleaseKissMyElbow.addons.components.extensions;
+namespace tyevco.addons.godot_components;
 
 public static class NodeExtensions
 {

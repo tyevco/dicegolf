@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace PleaseKissMyElbow.addons.components;
+namespace tyevco.addons.godot_components;
 
+[AttributeUsage(AttributeTargets.Class)]
 public class ComponentAttribute : Attribute
 {
     public string ScriptPath { get; set; }

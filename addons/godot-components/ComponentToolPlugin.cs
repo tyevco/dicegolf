@@ -5,13 +5,13 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Godot;
-using PleaseKissMyElbow.addons.components;
-using PleaseKissMyElbow.addons.components.scripts;
+
+namespace tyevco.addons.godot_components;
 
 [Tool]
 public partial class ComponentToolPlugin : EditorPlugin
 {
-    private static readonly Texture2D Texture = GD.Load<Texture2D>("res://addons/components/component_white.png");
+    private static readonly Texture2D Texture = GD.Load<Texture2D>("res://addons/godot-components/component_white.png");
 
     private List<Type> LoadedTypes { get; set; } = new List<Type>();
     private string ProjectRoot { get; set; }
@@ -83,7 +83,7 @@ public partial class ComponentToolPlugin : EditorPlugin
 
     private string GetProjectRoot([CallerFilePath] string path = null)
     {
-        return path[0..^40];
+        return path[0..^46];
     }
 }
 #endif
