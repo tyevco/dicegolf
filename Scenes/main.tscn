@@ -141,13 +141,11 @@ size = Vector3(64, 2, 10)
 transform = Transform3D(0.707107, -2.18557e-08, 0.707107, 1.09809e-22, 1, 3.09086e-08, -0.707107, -2.18557e-08, 0.707107, 2, 49, 14)
 size = Vector3(64, 2, 10)
 
-[node name="CameraRig" parent="." node_paths=PackedStringArray("TrackingTarget", "DebugObjectStart", "DebugObjectEnd") instance=ExtResource("9_7tsq0")]
+[node name="CameraRig" parent="." node_paths=PackedStringArray("TrackingTarget") instance=ExtResource("9_7tsq0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 MinimumViewAngle = -85.0
 MaximumViewAngle = 85.0
 TrackingTarget = NodePath("../D20")
-DebugObjectStart = NodePath("")
-DebugObjectEnd = NodePath("")
 
 [node name="Goal" parent="." instance=ExtResource("10_2yaue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03672, -1, -0.047)

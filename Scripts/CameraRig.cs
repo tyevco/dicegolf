@@ -145,7 +145,7 @@ public partial class CameraRig : Node3D
     private GodotObject GetTargettedObject()
     {
         var cameraTarget = Camera.GlobalPosition - Camera.GlobalTransform.Basis.Z * 100;
-        Ray.GlobalPosition = Camera.GlobalPosition;
+        //Ray.GlobalPosition = Camera.GlobalPosition;
         Ray.TargetPosition = Ray.ToLocal(cameraTarget);
 
         var collider = Ray.GetCollider();
