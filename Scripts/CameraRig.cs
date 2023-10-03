@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Diagnostics;
+using Godot;
 using PleaseKissMyElbow.addons.components.extensions;
 using PleaseKissMyElbow.addons.components.scripts;
 
@@ -24,13 +25,14 @@ public partial class CameraRig : Node3D
 
     [Export] public float MaximumViewAngle { get; set; } = -15f;
 
-    [ExportCategory("Follow Camera")] 
-
-    [Export] public Node3D TrackingTarget { get; set; }
+    [ExportCategory("Follow Camera")]
+    [Export]
+    public Node3D TrackingTarget { get; set; }
 
     [ExportCategory("Component Settings")]
-    [Export] public Camera3D Camera { get; set; }
-    
+    [Export]
+    public Camera3D Camera { get; set; }
+
     [Export] public Input.MouseModeEnum MouseMode { get; set; }
 
     [Export] public RayCast3D Ray { get; set; }
@@ -38,8 +40,10 @@ public partial class CameraRig : Node3D
     private float _horzMouseSensitivity;
     private float _vertMouseSensitivity;
     private SelectableComponent _selectableComponent = null;
-    
-    
+
+    [Export] public Node3D DebugObjectStart { get; set; }
+    [Export] public Node3D DebugObjectEnd { get; set; }
+
     public override void _Ready()
     {
         Input.MouseMode = MouseMode;
@@ -103,7 +107,7 @@ public partial class CameraRig : Node3D
                 _selectableComponent = selectableComponent;
             }
         }
-        
+
         var deltaAsFloat = (float)delta;
         var speedForFrame = WalkSpeed;
         if (Input.IsActionPressed("modifier_run"))
@@ -141,11 +145,42 @@ public partial class CameraRig : Node3D
     private GodotObject GetTargettedObject()
     {
         var screen = GetViewport().GetVisibleRect();
-        Ray.Position = Camera.Position;
+        var screenCenter = new Vector2(screen.Size.X / 2, screen.Size.Y / 2);
+        var cameraProjectOrigin = Camera.ProjectRayOrigin(screenCenter);
+        //var cameraTarget = Camera.ProjectPosition(screenCenter, 100f);
+        var cameraTarget = Camera.GlobalPosition - Camera.GlobalTransform.Basis.Z * 100;
+        Ray.GlobalPosition = Camera.GlobalPosition;
+        Ray.TargetPosition = Ray.ToLocal(cameraTarget);
+
+        var collider = Ray.GetCollider();
+
+        if (DebugObjectStart != null)
+            DebugObjectStart.Position = Ray.GlobalPosition;
+
+        DebugDraw3D.DrawLine(Camera.GlobalPosition, cameraTarget, Color.FromHsv(0.25f, 0.86f, 0.82f));
+        DebugDraw3D.DrawLine(Camera.GlobalPosition, GlobalPosition, Color.FromHsv(0.25f, 0.86f, 0.82f));
         
-        var to = Camera.ProjectRayNormal(new Vector2(screen.Size.X / 2, screen.Size.Y / 2)) * 100;
-        Ray.TargetPosition = to;
-        
-        return Ray.GetCollider();
+        if (collider != null)
+        {
+            DebugDraw3D.DrawLine(Ray.GlobalPosition, Ray.GetCollisionPoint(), Color.FromHsv(1f, 1f, 1f));
+            GD.Print(Ray.GlobalPosition + " : " + Ray.GetCollisionPoint() + "!");
+
+        }
+        else
+        {
+            DebugDraw3D.DrawLine(Ray.GlobalPosition, Ray.TargetPosition, Color.FromHsv(0.74f, 0.82f, 0.87f));
+            GD.Print(Ray.GlobalPosition + " : " + Ray.TargetPosition);
+
+        }
+
+        if (DebugObjectEnd != null)
+        {
+            if (collider != null)
+                DebugObjectEnd.Position = Ray.GetCollisionPoint();
+            else
+                DebugObjectEnd.Position = Ray.TargetPosition;
+        }
+
+        return collider;
     }
 }
