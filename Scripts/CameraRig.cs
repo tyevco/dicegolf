@@ -28,7 +28,13 @@ public partial class CameraRig : Node3D
     [ExportCategory("Follow Camera")]
     [Export]
     public Node3D TrackingTarget { get; set; }
+    
+    [Export]
+    public float MinimumTrackDistance { get; set; } = 0.1f;
 
+    [Export]
+    public float MaximumTrackDistance { get; set; } = 10f;
+    
     [ExportCategory("Component Settings")]
     [Export]
     public Camera3D Camera { get; set; }
@@ -40,9 +46,6 @@ public partial class CameraRig : Node3D
     private float _horzMouseSensitivity;
     private float _vertMouseSensitivity;
     private SelectableComponent _selectableComponent = null;
-
-    [Export] public Node3D DebugObjectStart { get; set; }
-    [Export] public Node3D DebugObjectEnd { get; set; }
 
     public override void _Ready()
     {

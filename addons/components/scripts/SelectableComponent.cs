@@ -2,6 +2,7 @@
 
 namespace PleaseKissMyElbow.addons.components.scripts;
 
+[Component]
 public partial class SelectableComponent : Node
 {
     [Export] public MeshInstance3D OutlineMesh { get; set; }

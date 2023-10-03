@@ -5,3 +5,6 @@
 - Track rolls + score?
 - Block out a basic simple level
 - basic aim/fling controls for dice
+
+
+Upload the component addon to GitHub and add to Godot asset library. 
