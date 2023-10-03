@@ -4,7 +4,6 @@
 [ext_resource type="Environment" uid="uid://teqiekgnccvo" path="res://Scenes/main.tres" id="1_ushqy"]
 [ext_resource type="Texture2D" uid="uid://cgqp2yckl4gdx" path="res://Assets/Textures/prototype_textures/Orange/texture_04.png" id="3_6der5"]
 [ext_resource type="Texture2D" uid="uid://cjvki8y02d6hr" path="res://Assets/Textures/prototype_textures/Dark/texture_05.png" id="3_8yg8r"]
-[ext_resource type="Material" uid="uid://8nbgdxqs776t" path="res://Prefabs/barbarian.tres" id="3_r41rm"]
 [ext_resource type="PackedScene" uid="uid://1w5yaqjxk26" path="res://Prefabs/camera_rig.tscn" id="9_7tsq0"]
 [ext_resource type="PackedScene" uid="uid://d31lckftvfesq" path="res://Prefabs/goal_zone.tscn" id="10_2yaue"]
 [ext_resource type="Script" path="res://Scripts/Status.cs" id="11_k1s23"]
@@ -15,6 +14,14 @@ uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1ul1"]
 albedo_texture = ExtResource("3_6der5")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdl6x"]
+resource_name = "barbarian_texture"
+transparency = 4
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_8yg8r")
+roughness = 0.5
 uv1_triplanar = true
 
 [node name="main" type="Node3D"]
@@ -67,7 +74,7 @@ use_collision = true
 size = Vector3(98, 50, 98)
 
 [node name="CSGCombiner3D3" type="CSGCombiner3D" parent="world"]
-material_override = ExtResource("3_r41rm")
+material_override = SubResource("StandardMaterial3D_cdl6x")
 use_collision = true
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="world/CSGCombiner3D3"]
