@@ -13,6 +13,9 @@ public partial class GolfSwing : Node
     [Export]
     public CameraRig Camera { get; set; }
 
+    [Export]
+    public Camera3D TargetingCamera { get; set; }
+    
     public float MaxPower { get; set; } = 15f;
 
     public float MinPower { get; set; } = 0.1f;
@@ -38,7 +41,10 @@ public partial class GolfSwing : Node
             {
                 EmitSignal(SignalName.Swing, -Camera.GlobalTransform.Basis.Z, _currentPower * 3);
             }
-
+            else
+            {
+                TargetingCamera.GlobalPosition = DiceTarget.GlobalPosition + (Camera.GlobalTransform.Basis.Z * 2);
+            }
             _currentPower = StartingPower;
             _increasePower = true;
             _isSwinging = !_isSwinging;

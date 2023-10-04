@@ -38,10 +38,11 @@ environment = ExtResource("1_ushqy")
 [node name="D20" parent="." instance=ExtResource("1_kgonf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 51, 0)
 
-[node name="GolfSwing" type="Node" parent="D20" node_paths=PackedStringArray("DiceTarget", "Camera")]
+[node name="GolfSwing" type="Node" parent="D20" node_paths=PackedStringArray("DiceTarget", "Camera", "TargetingCamera")]
 script = ExtResource("3_oer5l")
 DiceTarget = NodePath("..")
 Camera = NodePath("../../CameraRig")
+TargetingCamera = NodePath("../../SubViewportContainer/SubViewport/TargetingCamera3D")
 
 [node name="world" type="Node3D" parent="."]
 
@@ -179,6 +180,15 @@ offset_top = 76.0
 offset_right = 5159.0
 offset_bottom = 8555.0
 script = ExtResource("11_k1s23")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 360.0
+offset_bottom = 312.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+
+[node name="TargetingCamera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 51, 0)
 
 [connection signal="DiceRolled" from="D20" to="CanvasLayer/Status" method="_on_d_20_dice_rolled"]
 [connection signal="Swing" from="D20/GolfSwing" to="D20" method="_on_golf_swing_swing"]
