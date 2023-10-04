@@ -20,11 +20,14 @@ _surfaces = [{
 }]
 
 [node name="dice" instance=ExtResource("1_6ygd0")]
+collision_layer = 3
+collision_mask = 3
 
 [node name="collision" parent="." index="0"]
 shape = SubResource("ConvexPolygonShape3D_g0nf4")
 
 [node name="mesh" parent="visuals" index="0"]
+layers = 3
 mesh = ExtResource("1_47260")
 
 [node name="meshOutline" parent="visuals/mesh" index="0"]

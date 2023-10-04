@@ -102,9 +102,9 @@ public partial class Dice : RigidBody3D
         EmitSignal(SignalName.DiceRolled, result, this);
     }
 
-    public void _on_golf_swing_swing(Vector3 direction, float power)
+    public void _on_golf_swing_swing(Vector3 direction, Vector3 impactPoint, float power)
     {
         Rolled = true;
-        ApplyImpulse(direction * power);
+        ApplyImpulse(direction * power, ToLocal(impactPoint));
     }
 }
