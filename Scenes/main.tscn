@@ -49,7 +49,7 @@ RayRig = NodePath("../RayRig")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="D20"]
 layers = 2
-radius = 0.25
+radius = 0.1
 
 [node name="RayRig" type="Node3D" parent="D20"]
 

@@ -70,7 +70,7 @@ public partial class GolfSwing : Node
         var collider = TargetRay.GetCollider();
         if (collider != null)
         {
-            TargetLocator.Position = TargetLocator.ToLocal(TargetRay.GetCollisionPoint());
+            TargetLocator.GlobalPosition = TargetRay.GetCollisionPoint();
         }
         
         if (_isSwinging)
